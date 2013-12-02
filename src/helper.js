@@ -7,7 +7,9 @@
 		url = 'http://blockchain.info/multiaddr?limit=0&cors=true&active=',
 		current_page = location.pathname.split('/')[1].split('?')[0],
 		audio = document.createElement('audio'),
-		version = 'v2';
+		version = 'v2',
+		page_from = 2,
+		page_to   = 100;
 
 	audio.setAttribute('src', 'http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/Samples/Perverse/Utopia%20Critical%20Stop.WAV');
 	audio.addEventListener("ended", function() {
@@ -20,25 +22,8 @@
 	// format current page/total pages
 	h2.innerHTML = h2.innerHTML.replace('Page ','').replace('out of ','\n');
 
-	// generate random page number
-	var maxPage = h2.innerHTML.split('\n')[1];
-	var digits = Math.ceil(Math.random()*maxPage.length);
-	do {
-		valid = true;
-		page = '';
-		for(i=0;i<digits;i++) {
-			page += Math[i?'floor':'ceil'](Math.random()*(i?10:9));
-		}
-		if(digits==maxPage.length) {
-			for(i=0;i<digits;i++) {
-				var rc = page[i]|0, mc = maxPage[i]|0;
-				if(rc!=mc) {
-					valid = rc<mc;
-					break;
-				}
-			}
-		}
-	} while(!valid);
+	page = current_page < page_to ? current_page + 1 : page_from;
+
 	h1.innerHTML += ' <a id="randomPage" href="/'+page+'">[Random Page]</a>';
 
 	// check wallets
