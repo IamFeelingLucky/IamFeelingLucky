@@ -1,11 +1,12 @@
 (function(){
 	var i, valid, page,
 		jackpot = false,
+		exclusions = [1, 19],
 		h1 = document.querySelector('h1'),
 		h2 = document.querySelector('h2'),
 		list = document.querySelectorAll('.keys a[href*="blockchain.info"]'),
 		url = 'http://blockchain.info/multiaddr?limit=0&cors=true&active=',
-		current_page = location.pathname.split('/')[1].split('?')[0],
+		current_page = parseInt(location.pathname.split('/')[1].split('?')[0], 10),
 		audio = document.createElement('audio'),
 		version = 'v2',
 		page_from = 2,
@@ -61,7 +62,7 @@
 			}
 			var adr = list.item(--c).text, d = al[adr], tf = d[0], tx = d[1], tag = tf>0 ? 'b' : 'i';
 
-			if(tag === 'b' && current_page !== '1') {
+			if(tag === 'b' && exclusions.indexOf(current_page) === -1) {
 				audio.play();
 				jackpot = true;
 			}
