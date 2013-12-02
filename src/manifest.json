@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 
-	"name": "IamFeelingLucky",
+	"name": "IamFeelingLucky v2",
 	"description": "directory.io helper",
 	"version": "0.1",
 
@@ -11,7 +11,7 @@
 
 	"content_scripts": [
 		{
-			"matches": ["http://directory.io/*"],
+			"matches": ["http://directory.io/*?v2"],
 			"css": ["helper.css"],
 			"js": ["helper.js"],
 			"run_at": "document_end"
