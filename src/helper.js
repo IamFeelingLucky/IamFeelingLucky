@@ -1,7 +1,7 @@
 (function(){
 	var i, valid, page,
 		jackpot = false,
-		exclusions = [1, 19],
+		exclusions = [1],
 		h1 = document.querySelector('h1'),
 		h2 = document.querySelector('h2'),
 		list = document.querySelectorAll('.keys a[href*="blockchain.info"]'),
