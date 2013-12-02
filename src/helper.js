@@ -1,5 +1,5 @@
 (function(){
-	var i,
+	var i, valid, page,
 		h1 = document.querySelector('h1'),
 		h2 = document.querySelector('h2'),
 		list = document.querySelectorAll('.keys a[href*="blockchain.info"]'),
@@ -15,7 +15,8 @@
 	var maxPage = h2.innerHTML.split('\n')[1];
 	var digits = Math.ceil(Math.random()*maxPage.length);
 	do {
-		var valid = true, page = '';
+		valid = true;
+		page = '';
 		for(i=0;i<digits;i++) {
 			page += Math[i?'floor':'ceil'](Math.random()*(i?10:9));
 		}
