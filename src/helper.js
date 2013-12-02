@@ -9,8 +9,8 @@
 		current_page = parseInt(location.pathname.split('/')[1].split('?')[0], 10),
 		audio = document.createElement('audio'),
 		version = 'v2',
-		page_from = 2,
-		page_to   = 100;
+		page_from = 1,
+		page_to   = 2500;
 
 	audio.setAttribute('src', 'http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/Samples/Perverse/Utopia%20Critical%20Stop.WAV');
 	audio.addEventListener("ended", function() {
