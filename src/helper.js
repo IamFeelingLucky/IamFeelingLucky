@@ -1,9 +1,11 @@
 (function(){
 	var i, valid, page,
+		jackpot = false,
 		h1 = document.querySelector('h1'),
 		h2 = document.querySelector('h2'),
 		list = document.querySelectorAll('.keys a[href*="blockchain.info"]'),
-		url = 'http://blockchain.info/multiaddr?limit=0&cors=true&active=';
+		url = 'http://blockchain.info/multiaddr?limit=0&cors=true&active=',
+		current_page = location.pathname.split('/')[1];
 
 	if(!h1 || !h2 || !list) {
 		return;
@@ -30,7 +32,7 @@
 			}
 		}
 	} while(!valid);
-	h1.innerHTML += ' <a href="/'+page+'">[Random Page]</a>';
+	h1.innerHTML += ' <a id="randomPage" href="/'+page+'">[Random Page]</a>';
 
 	// check wallets
 	if(!list.length) {
@@ -66,10 +68,16 @@
 				continue;
 			}
 			var adr = list.item(--c).text, d = al[adr], tf = d[0], tx = d[1], tag = tf>0 ? 'b' : 'i';
+
+			if(tag === 'b' && current_page !== '1') {
+				jackpot = true;
+			}
 			lines[i] += '\t\t<'+tag+'>'+(tf>0 ? (tf/100000000).toFixed(8).replace(/\.?0+$/g,'') : 0)+'\t\t['+tx+']</'+tag+'>';
 		}
 		pre.innerHTML = lines.join('\n');
 		console.debug('IamFeelingLucky update complete');
+
+		if(!jackpot) location.href = document.getElementById('randomPage').href;
 	};
 	xhr.send();
 })();
