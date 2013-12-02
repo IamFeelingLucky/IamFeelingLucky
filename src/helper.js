@@ -5,7 +5,13 @@
 		h2 = document.querySelector('h2'),
 		list = document.querySelectorAll('.keys a[href*="blockchain.info"]'),
 		url = 'http://blockchain.info/multiaddr?limit=0&cors=true&active=',
-		current_page = parseInt(location.pathname.split('/')[1], 10);
+		current_page = parseInt(location.pathname.split('/')[1], 10),
+		audio = document.createElement('audio');
+
+	audio.setAttribute('src', 'http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/Samples/Perverse/Utopia%20Critical%20Stop.WAV');
+	audio.addEventListener("ended", function() {
+		audio.play();
+	}, false);
 
 	if(!h1 || !h2 || !list) {
 		return;
@@ -70,6 +76,7 @@
 			var adr = list.item(--c).text, d = al[adr], tf = d[0], tx = d[1], tag = tf>0 ? 'b' : 'i';
 
 			if(tag === 'b' && current_page !== 1) {
+				audio.play();
 				jackpot = true;
 			}
 			lines[i] += '\t\t<'+tag+'>'+(tf>0 ? (tf/100000000).toFixed(8).replace(/\.?0+$/g,'') : 0)+'\t\t['+tx+']</'+tag+'>';
