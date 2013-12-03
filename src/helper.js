@@ -23,7 +23,7 @@
 
 	// generate random page number
 	var maxPage = h2.innerHTML.split('\n')[1];
-	var digits = Math.ceil(Math.random()*maxPage.length);
+	var digits = maxPage.length;
 	do {
 		valid = true;
 		page = '';
